@@ -1,0 +1,6 @@
+---
+final_name: benjamin_blobstore
+blobstore:
+  provider: local
+  options:
+    blobstore_path: /Users/benjamin/workspace/bosh/rootfses-boshrelease/local_blobstore

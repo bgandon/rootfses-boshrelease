@@ -13,6 +13,7 @@
 /config/private.yml
 /config/settings.yml
 /dev_releases/
+/local_blobstore
 /packages/**/*.zip
 /packages/**/*.tgz
 /packages/**/*.tar.gz
