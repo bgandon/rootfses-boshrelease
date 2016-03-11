@@ -1,0 +1,8 @@
+---
+jobs:
+  - name: cflinuxfs2
+    release: rootfses
+
+properties:
+  rootfses:
+    trusted_certs: (( property_overrides.rootfses.trusted_certs || nil ))

@@ -1,0 +1,17 @@
+---
+property_overrides:
+  garden:
+    persistent_image_list:
+    # Here we change the path because we align it to the different name of our
+    # package. We are forced to use a different package name because BOSH does
+    # not support jobs with smae name from different releases.
+    - /var/vcap/packages/cflinuxfs2/rootfs
+  rootfs_cflinuxfs2:
+    # This one becomes nil because not used anymore, as we replace Diego's
+    # 'rootfs_cflinuxfs2' package by our 'cflinuxfs2' package, and its
+    # 'rootfses' job by our 'cflinuxfs2' job.
+    #
+    # Our 'cflinuxfs2' job uses the 'rootfses.trusted_certs:' property because
+    # there is no reason why those trusted certificates would be specific to
+    # cflinuxfs2.
+    trusted_certs: ~
