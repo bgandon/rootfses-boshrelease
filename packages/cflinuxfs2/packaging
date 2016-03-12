@@ -1,4 +1,8 @@
 set -e -x
 
+package="cflinuxfs2"
+version="1.43.0"
+file="${package}-${version}.tar.gz"
+
 echo "Copying rootfs"
-cp rootfs/cflinuxfs2-1.36.0.tar.gz ${BOSH_INSTALL_TARGET}/cflinuxfs2.tar.gz
+cp cflinuxfs2/$file ${BOSH_INSTALL_TARGET}/cflinuxfs2.tar.gz
