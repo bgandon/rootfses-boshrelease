@@ -1,4 +1,5 @@
 ---
 name: cflinuxfs2
+dependencies: []
 files:
-- cflinuxfs2/cflinuxfs2-1.43.0.tar.gz
+  - cflinuxfs2/cflinuxfs2-*.tar.gz
