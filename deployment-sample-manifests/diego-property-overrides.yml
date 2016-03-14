@@ -15,3 +15,8 @@ property_overrides:
     # there is no reason why those trusted certificates would be specific to
     # cflinuxfs2.
     trusted_certs: ~
+properties:
+  diego:
+    rep:
+      preloaded_rootfses:
+        - cflinuxfs2:/var/vcap/packages/cflinuxfs2/rootfs
