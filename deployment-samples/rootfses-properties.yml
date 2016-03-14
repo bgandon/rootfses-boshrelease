@@ -1,8 +1,6 @@
 ---
-jobs:
-  - name: cflinuxfs2
-    release: rootfses
-
 properties:
   rootfses:
+    # Here are specified the certificates that should be trusted by any root
+    # filesystem.
     trusted_certs: (( property_overrides.rootfses.trusted_certs || nil ))

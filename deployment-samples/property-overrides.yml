@@ -1,0 +1,22 @@
+---
+property_overrides:
+  garden:
+    persistent_image_list:
+    # Here we change the path because we align it to the different name of our
+    # package. We are forced to use a different package name because BOSH does
+    # not support jobs with same name from different releases.
+    - /var/vcap/packages/cflinuxfs2/rootfs
+  rep:
+    # This property has to be customized to stay in line with the directory
+    # change for rootfs.
+    preloaded_rootfses:
+      - (( "cflinuxfs2:" garden.persistent_image_list.[0] ))
+  rootfs_cflinuxfs2:
+    # This one becomes nil because not used anymore, as our 'cflinuxfs2' job
+    # uses the 'rootfses.trusted_certs' property.
+    #
+    # The reason why we move from 'rootfs_cflinuxfs2.trusted_certs' to
+    # 'rootfses.trusted_certs' is that there is no reason why those trusted
+    # certificates would be specific to cflinuxfs2. Instead, they are meant to
+    # be set up into any root filesystem.
+    trusted_certs: ~

@@ -1,0 +1,38 @@
+diff manifest-generation/bosh-lite-stubs/property-overrides.yml manifest-generation/bosh-lite-stubs/property-overrides.yml
+--- manifest-generation/bosh-lite-stubs/property-overrides.yml
++++ manifest-generation/bosh-lite-stubs/property-overrides.yml
+@@ -383,9 +383,12 @@ property_overrides:
+     listen_network: tcp
+     listen_address: 0.0.0.0:7777
+     log_level: debug
++    persistent_image_list: (( merge ))
++  rootfs_cflinuxfs2: (( merge ))
+   nsync:
+     log_level: debug
+   rep:
++    preloaded_rootfses: (( merge ))
+     evacuation_timeout_in_seconds: 60
+     log_level: debug
+   route_emitter:
+diff manifest-generation/diego.yml manifest-generation/diego.yml
+--- manifest-generation/diego.yml
++++ manifest-generation/diego.yml
+@@ -612,6 +612,7 @@ properties:
+       evacuation_timeout_in_seconds: (( property_overrides.rep.evacuation_timeout_in_seconds || nil ))
+       trusted_certs: (( property_overrides.rep.trusted_certs || nil ))
+       log_level: (( property_overrides.rep.log_level || nil ))
++      preloaded_rootfses: (( property_overrides.rep.preloaded_rootfses || ["cflinuxfs2:/var/vcap/packages/rootfs_cflinuxfs2/rootfs"] ))
+     rootfs_cflinuxfs2:
+       trusted_certs: (( property_overrides.rootfs_cflinuxfs2.trusted_certs || nil ))
+     route_emitter:
+@@ -747,8 +748,8 @@ base_job_templates:
+       release: cf
+     - name: garden
+       release: garden-linux
+-    - name: rootfses
+-      release: diego
++    - name: cflinuxfs2
++      release: rootfses
+     - name: metron_agent
+       release: cf
+   database:
