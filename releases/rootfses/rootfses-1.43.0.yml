@@ -1,0 +1,16 @@
+---
+packages:
+- name: cflinuxfs2
+  version: e5763b6452046df0a0fadb23a6583cf1332deac8
+  fingerprint: e5763b6452046df0a0fadb23a6583cf1332deac8
+  sha1: 379fc33a226678b095cff989cf0300a0deac62d7
+  dependencies: []
+jobs:
+- name: cflinuxfs2
+  version: bce1f8691e14ff036685508aef4a7897b72db406
+  fingerprint: bce1f8691e14ff036685508aef4a7897b72db406
+  sha1: 56e3563c833296ee0d9b8f7c9536d9617d2ace12
+commit_hash: 4faa9b38
+uncommitted_changes: false
+name: rootfses
+version: 1.43.0
