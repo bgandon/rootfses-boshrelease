@@ -1,7 +1,7 @@
 set -e -x
 
 package="cflinuxfs2"
-version="1.43.0"
+version="1.48.0"
 file="${package}-${version}.tar.gz"
 
 echo "Copying rootfs"
