@@ -41,12 +41,10 @@ Here are the basic instruction
 3. If needed, customize the [deployment-samples/rootfses-properties.yml](./deployment-samples/rootfses-properties.yml)
    and add them to your Diego deployment.
 
-4. Create the release tarball and upload it to the director
+4. Create the release tarball and upload it to the director:
 
-        ```bash
         bosh create release --final --name rootfses --version 1.43.0
         bosh upload release
-        ```
 
 5. Deploy with `bosh deploy`.
 
