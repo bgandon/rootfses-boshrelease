@@ -41,11 +41,63 @@ Here are the basic instruction
 3. If needed, customize the [deployment-samples/rootfses-properties.yml](./deployment-samples/rootfses-properties.yml)
    and add them to your Diego deployment.
 
-4. Create the release tarball and upload it to the director:
+4. Check out the latest version of this release:
+
+        ls releases/rootfses/rootfses-*.yml
+
+5. Edit `config/final.yml` and update the `blobstore_path` so that it matches
+   a local directory for your blobs, like the `./local_blobstore` I use myself.
+
+6. If the latest version is `1.43.0`, create the release tarball and upload it
+   to the BOSH director like this:
 
         bosh create release --final --name rootfses --version 1.43.0
         bosh upload release
 
-5. Deploy with `bosh deploy`.
+7. Deploy with `bosh deploy`.
 
 Have fun!
+
+
+How to create a new version of this release?
+--------------------------------------------
+
+If a [new version of cflinuxfs2](https://github.com/cloudfoundry/stacks/releases)
+is released, let's say `1.48.0`, then
+
+1. Edit the `packages/cflinuxfs2/prepare` script in your favorite editor.
+   Let's say Emacs because Emacs rocks.
+
+        cd packages/cflinuxfs2
+        emacs prepare
+
+2. Update the version line like this.
+
+        version="1.48.0"
+
+3. Staying in the `packages/cflinuxfs2`, run the `prepare` script.
+
+        ./prepare
+
+4. Edit the `packaging` script in `packages/cflinuxfs2` and again change the
+   version line as in the `prepare` script.
+
+        version="1.48.0"
+
+5. Commit your changes to git.
+
+6. At the root of the release directory, create the final release using the
+   same version as in `prepare` and `packaging` above.
+
+        cd ../..
+        bosh create release --final --name rootfses --version 1.48.0
+
+7. Staying in this directory, upload your newly created release to your BOSH
+   director.
+
+        bosh upload release
+
+8. Deploy with `bosh deploy`.
+
+Have more fun!
+
