@@ -11,13 +11,13 @@ In a Cloud Foundry deployment, this “cflinuxfs2” root filesystem is the basi
 for all containers where applications are deployed using
 [buildpacks](http://docs.gstack.io/app-and-context/#a-buildpack).
 
-So you need to update it.
+So when there's a new version, you need to update it. All your containers
+might be flawed with security breaches.
 
-And currently, there is one new version available every 3 days. Yes, *two* new
-version per week.
-
-And the best part is: there is no easy way to update “cflinuxfs2”, except this
-very BOSH relsease. That's why you definitely need it.
+Currently, there is one new version available every 3 days. Yes, *two* new
+version per week! And the best part: there is no easy way to update
+“cflinuxfs2”, except this very BOSH relsease. That's why you definitely need
+it.
 
 
 Prerequisites
@@ -30,13 +30,14 @@ supported. Diego rocks anyway. You shall upgrade to Diego.
 Usage
 -----
 
-Here are the basic instruction
+Here are the basic instructions to implement this release in your Diego
+deployment.
 
 1. Patch Diego deployment manifests with the
-   [deployment-samples/diego-manifests.yml.patch](./deployment-samples/diego-manifests.yml.patch)
+   [deployment-samples/diego-manifests.yml.patch](./deployment-samples/diego-manifests.yml.patch).
 
 2. Add the [deployment-samples/property-overrides.yml](./deployment-samples/property-overrides.yml)
-   to the Diego deployment
+   to your Diego deployment.
 
 3. If needed, customize the [deployment-samples/rootfses-properties.yml](./deployment-samples/rootfses-properties.yml)
    and add them to your Diego deployment.
@@ -48,10 +49,10 @@ Here are the basic instruction
 5. Edit `config/final.yml` and update the `blobstore_path` so that it matches
    a local directory for your blobs, like the `./local_blobstore` I use myself.
 
-6. If the latest version is `1.43.0`, create the release tarball and upload it
+6. If the latest version is `1.48.0`, create the release tarball and upload it
    to the BOSH director like this:
 
-        bosh create release --final --name rootfses --version 1.43.0
+        bosh create release --final --name rootfses --version 1.48.0
         bosh upload release
 
 7. Deploy with `bosh deploy`.
@@ -153,3 +154,6 @@ is released, let's say `1.48.0`, then
         git push --tags
 
 Have more fun!
+
+(Yes, I know, this is a terrible 15-steps process. But that's the BOSH world,
+dude!)
