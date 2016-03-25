@@ -2,4 +2,4 @@
 name: cflinuxfs2
 dependencies: []
 files:
-  - cflinuxfs2/cflinuxfs2-*.tar.gz
+  - cflinuxfs2/cflinuxfs2-1.48.0.tar.gz
