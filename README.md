@@ -75,29 +75,81 @@ is released, let's say `1.48.0`, then
 
         version="1.48.0"
 
-3. Staying in the `packages/cflinuxfs2`, run the `prepare` script.
+3. Staying in the `packages/cflinuxfs2`, delete any previous version of the
+   downloaded `cflinuxfs2-1.*.0.tar.gz` archive.
+
+        rm -r cflinuxfs2/
+
+4. Staying in the `packages/cflinuxfs2`, run the `prepare` script.
 
         ./prepare
 
-4. Edit the `packaging` script in `packages/cflinuxfs2` and again change the
+5. Add the blob to your currently-being-built release, using the `cflinuxfs2/`
+   path in the blobstore so that it matches the specified path in `spec`,
+   which will be updated in the next step.
+
+        cd ../..
+        bosh add blob packages/cflinuxfs2/cflinuxfs2/cflinuxfs2-1.48.0.tar.gz cflinuxfs2
+
+6. Edit the `spec` for the `cflinuxfs2` package to properly reference the blob
+   you just added.
+
+        files:
+          - cflinuxfs2/cflinuxfs2-1.48.0.tar.gz
+
+7. Edit the `packaging` script in `packages/cflinuxfs2` and again change the
    version line as in the `prepare` script.
 
         version="1.48.0"
 
-5. Commit your changes to git.
+8. Commit all your changes to git, tag them `v1.48.0`, and push all that
+   (including the tag) to a repo of your choice (public or private, but your
+   BOSH Director need to be able to access it if you specified the `rootfses`
+   release as a git repo in your deployment)
 
-6. At the root of the release directory, create the final release using the
-   same version as in `prepare` and `packaging` above.
+        git commit -am "Added blob for cflinuxfs2 version 1.48.0 + Updated blob version in package + Updated scripts"
+        git push
+
+
+9. Upload your blobs to the blobstore. Here it just copies the new blob to the
+   local blobstore in `./local_blobstore`.
+
+        bosh upload blobs
+
+10. At the root of the release directory, create a dev release to test the
+    result, using the same version as in `prepare` and `packaging` above.
 
         cd ../..
-        bosh create release --final --name rootfses --version 1.48.0
+        bosh create release --with-tarball --name rootfses --version 1.48.0
 
-7. Staying in this directory, upload your newly created release to your BOSH
-   director.
+11. Upload your dev created release to your BOSH director.
 
-        bosh upload release
+        bosh upload release dev_releases/rootfses/rootfses-1.48.0.tgz
 
-8. Deploy with `bosh deploy`.
+12. Update your diego deployment to use the new `roofs` version you just
+    uploaded.
+
+        releases:
+          - name: rootfses
+            version: 1.48.0
+
+13. Test deployment with `bosh deploy`. If it fails, find the problem and when
+    you know what to fix, reset your release with `bosh reset release`, make
+    your fixes. Then rollback your deployment manifest, deploy it back with
+    `bosh deploy` and when the dev release is no more used by any deployment
+    (which you can check with `bosh releases`) then delete it with
+    `bosh -n delete release rootfses 1.48.0` and go back to step #10.
+
+14. Create a final release out of your dev release.
+
+        bosh -n create release --final --name rootfses --version 1.48.0
+
+15. Commit your final release to git and tag it properly.
+
+        git add .
+        git commit -m "Created final 'rootfses' release version 1.48.0"
+        git tag v1.48.0
+        git push
+        git push --tags
 
 Have more fun!
-
