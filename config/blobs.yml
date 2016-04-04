@@ -1,5 +1,5 @@
 ---
-cflinuxfs2/cflinuxfs2-1.48.0.tar.gz:
-  object_id: 78526ecf-58be-4e4f-bc93-ef5e52faceab
-  sha: 0600a241fd996dbc4acb6c109959c602a2b1f857
-  size: 276602327
+cflinuxfs2/cflinuxfs2-1.49.0.tar.gz:
+  object_id: 7c2a815b-9e31-4d1c-9495-b1f4b02cc3b5
+  sha: d6df60327b85f172368805449ae61d20e1b794ac
+  size: 276602317
