@@ -3,7 +3,7 @@
 set -x # Print commands and their arguments as they are executed
 
 package="cflinuxfs2"
-version="1.48.0"
+version="1.49.0"
 file="${package}-${version}.tar.gz"
 url="https://github.com/cloudfoundry/stacks/releases/download/$version/$file"
 
