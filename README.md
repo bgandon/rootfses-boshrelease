@@ -162,3 +162,7 @@ Have more fun!
 
 (Yes, I know, this is a terrible 15-steps process. But that's the BOSH world,
 dude!)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/bgandon/rootfses-boshrelease/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
