@@ -49,13 +49,31 @@ deployment.
 5. Edit `config/final.yml` and update the `blobstore_path` so that it matches
    a local directory for your blobs, like the `./local_blobstore` I use myself.
 
-6. If the latest version is `1.49.0`, create the release tarball and upload it
+```bash
+cat > config/final.yml <<EOF
+---
+final_name: local_blobstore
+blobstore:
+  provider: local
+  options:
+    blobstore_path: $PWD/local_blobstore
+EOF
+```
+
+6. Download the `cflinuxfs2` blob, add it to the release, and put it into the
+   local blobstore you just configured.
+
+        pushd packages/cflinuxfs2 && ./prepare && popd
+        bosh add blob packages/cflinuxfs2/cflinuxfs2/cflinuxfs2-1.49.0.tar.gz cflinuxfs2
+        bosh -n upload blobs
+
+7. If the latest version is `1.49.0`, create the release tarball and upload it
    to the BOSH director like this:
 
         bosh create release --final --name rootfses --version 1.49.0
         bosh upload release
 
-7. Deploy with `bosh deploy`.
+8. Deploy with `bosh deploy`.
 
 Have fun!
 
