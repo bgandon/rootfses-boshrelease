@@ -1,4 +1,4 @@
-Rootfses BOSH Release
+Rootfses BOSH Release [![.](https://gaproxy.gstack.io/UA-74118635-2/gstackio/rootfses-boshrelease/readme?pixel&dh=github.com)](https://github.com/gstackio/ga-beacon)
 =====================
 
 This [BOSH release](http://bosh.io/docs/release.html) helps you in deploying
